@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькулятор заказа</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="main">
+    <header class="page-header">
+      <p class="eyebrow">Стоимость покупки</p>
+      <h1>Калькулятор заказа</h1>
+      <p class="introduction">Укажите цену, количество и скидку — получите сумму с учетом доставки.</p>
+    </header>
+
+    <div class="calculator-layout">
+      <form id="order-form" class="order-form" autocomplete="off" novalidate>
+        <h2>Параметры заказа</h2>
+        <div class="field">
+          <label for="price-input">Цена за единицу, ₽</label>
+          <input id="price-input" type="text" inputmode="decimal" autocomplete="off" placeholder="Например, 100,00" aria-describedby="price-hint">
+          <p id="price-hint" class="hint">От 0,01 до 100 000,00 ₽. Точка или запятая.</p>
+        </div>
+        <div class="paired-fields">
+          <div class="field">
+            <label for="quantity-input">Количество, шт.</label>
+            <input id="quantity-input" type="text" inputmode="numeric" autocomplete="off" value="1" aria-describedby="quantity-hint">
+            <p id="quantity-hint" class="hint">Целое число от 1 до 100.</p>
+          </div>
+          <div class="field">
+            <label for="discount-input">Скидка, %</label>
+            <input id="discount-input" type="text" inputmode="numeric" autocomplete="off" value="0" aria-describedby="discount-hint">
+            <p id="discount-hint" class="hint">Целое число от 0 до 50.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="delivery-select">Способ доставки</label>
+          <select id="delivery-select" aria-describedby="delivery-hint">
+            <option value="pickup">Самовывоз</option>
+            <option value="courier">Курьер</option>
+          </select>
+          <p id="delivery-hint" class="hint">Самовывоз — бесплатно. Курьер — 300,00 ₽; бесплатно от 3 000,00 ₽ после скидки.</p>
+        </div>
+        <p id="form-error" class="form-error" role="alert" hidden></p>
+        <div class="form-actions">
+          <button id="calculate-button" class="button button-primary" type="submit">Рассчитать</button>
+          <button id="reset-button" class="button button-secondary" type="button">Сбросить</button>
+        </div>
+      </form>
+
+      <section class="summary-panel" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Расчет</h2>
+        <p id="result-placeholder" class="result-placeholder">Заполните параметры заказа и нажмите «Рассчитать».</p>
+        <div id="result" class="result" aria-live="polite" hidden>
+          <dl class="breakdown">
+            <div><dt>Товары</dt><dd id="subtotal-value">0,00 ₽</dd></div>
+            <div><dt>Скидка</dt><dd id="discount-value">0,00 ₽</dd></div>
+            <div><dt>После скидки</dt><dd id="net-value">0,00 ₽</dd></div>
+            <div><dt>Доставка</dt><dd id="delivery-value">0,00 ₽</dd></div>
+          </dl>
+          <div class="total-row"><span>Итого</span><strong id="total-value">0,00 ₽</strong></div>
+        </div>
+        <button id="export-button" class="button export-button" type="button" disabled>Скачать расчет</button>
+        <p class="hint export-hint">Текстовый файл order.txt</p>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">Калькулятор заказа, версия 1.0 · команда: "Крутые перцы"</footer>
+  <script src="export.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
